@@ -1,5 +1,6 @@
 #info_parser 
 import re 
+import sys 
 
 class InfoParse:
 
@@ -43,19 +44,19 @@ class InfoParse:
         raise TypeError("Logo image not found ")
     
 
-    def find_contact_tel(self, html_string ):
-        regex_phone_candidate = r"(?:([+]\d{1,4})[-.\s]?)?(?:[(](\d{1,3})[)][-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})"
-        r = re.compile(regex_phone_candidate)
-        phone_list = re.findall(r , html_string)
+def find_contact_tel(  html_string ):
+                                ## 1 a 4 digitos 
+    regex_phone_candidate = r"(?:([+]\d{1,4})[-.\s]?)?(?:([(]\d{1,3}[)])[-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})"
+    r = re.compile(regex_phone_candidate)
+    phone_list = re.findall(r , html_string)
 
-        if len(phone_list) > 0:
-            return phone_list
-        else:      
-            raise TypeError("Tel contact info not found ")
-
-        # html text is US, BR, Latam standard format    
+        # Captures US, BR, Latam , +  phone format    
+    return phone_list
+#        if len(phone_list) > 0:
+#            return phone_list
+#        else:      
+            #try other phone formats 
         # au format: 13 + 4 digits 
         #Known flaws: Letter as number Ex: 0800 TENANT 
- 
 
 

@@ -1,18 +1,30 @@
-from scraper import PyScraper
+import asyncio
+from scraper import PyScraper, asyncio_main
 from info_parser import InfoParse
 
 if __name__ == '__main__':
 
+    
+    
+
     import sys
     print('PyScraper()')
-    PyScraper()
+    scraper = PyScraper()
     
     input_string = sys.stdin.read()
-    print(input_string)
+    #print(input_string)
+
+   
   
 
     url_to_scrape , not_url = InfoParse().format_input(input_string)
-    phone_list = InfoParse().find_contact_tel(input_string)
+    
+    #scrape_url = PyScraper().request(url_to_scrape)
+
+    
+
+
+    phone_list = asyncio.run(asyncio_main(url_to_scrape))
 
     print('phone_list' , phone_list)
 

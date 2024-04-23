@@ -1,9 +1,0 @@
-regex
-
-tornado
-
-\/ Check if needed. Were in Tornado github example 
-aiopg
-bcrypt
-markdown
-psycopg2
