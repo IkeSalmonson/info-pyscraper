@@ -1,0 +1,22 @@
+from scraper import PyScraper
+from info_parser import InfoParse
+
+if __name__ == '__main__':
+
+    import sys
+    print('PyScraper()')
+    PyScraper()
+    
+    input_string = sys.stdin.read()
+    print(input_string)
+  
+
+    url_to_scrape , not_url = InfoParse().format_input(input_string)
+    phone_list = InfoParse().find_contact_tel(input_string)
+
+    print('phone_list' , phone_list)
+
+
+    print('\n end of compose_app')
+    sys.exit(0)
+    
