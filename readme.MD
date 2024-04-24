@@ -17,6 +17,9 @@ https://www.dataleadsfuture.com/aiomultiprocess-super-easy-integrate-multiproces
 Regex URL 
 https://www.makeuseof.com/regular-expressions-validate-url/
 
+beautifulsoup
+https://stackoverflow.com/questions/74270903/beautifulsoup-obtaining-the-tag-and-its-parent-from-the-text-inside
+
 
 Scraper Lib (maybe)
 https://playwright.dev/python/docs/intro
