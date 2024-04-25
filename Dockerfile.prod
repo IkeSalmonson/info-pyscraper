@@ -10,7 +10,7 @@ COPY /src ./
 
 ENV PYTHONBUFFERED 1 
 
-ENTRYPOINT [ "python3","-u", "main"] 
+ENTRYPOINT [ "python3","-u", "main.py"] 
 
 #ENTRYPOINT [ "python3","-u", "compose_app"] 
 #CMD ["echo"]

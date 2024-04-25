@@ -1,7 +1,8 @@
-import asyncio
-from scraper import aiomultiprocess_main , asyncio_main
-from info_parser import format_input, format_output
 import sys
+import asyncio
+from scraper import aiomultiprocess_main #, asyncio_main
+from info_parser import format_input
+
 
 if __name__ == '__main__':
 
@@ -14,7 +15,7 @@ if __name__ == '__main__':
 
     ## More perfomance: aiomultiproces
     url_infos = asyncio.run(aiomultiprocess_main(scrape_urls))
-    
+
     for output_string in url_infos:
         print(output_string)
 

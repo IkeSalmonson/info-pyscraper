@@ -27,7 +27,7 @@ docker build -t 'pyscraper:dev'  .
 
  Running develpment image on local volume: 
 ```
-cat test.txt |docker run -i -v $(pwd)/src:/usr/share/src    ikesalmonson/python-hello python3 -u compose_app
+cat test.txt |docker run -i -v $(pwd)/src:/usr/share/src pyscraper:dev python3 -u main.py
 ```
 
 
@@ -35,11 +35,12 @@ cat test.txt |docker run -i -v $(pwd)/src:/usr/share/src    ikesalmonson/python-
 
 The dev docker image is needed for this section.  Run the command:
 ```
-docker run -i -v $(pwd)/src:/usr/share/src  pyscraper:dev python3  -m pylint
+docker run -i -v $(pwd)/src:/usr/share/src  pyscraper:dev python3  -m pylint .
 ```
 To run the linter toolkit.
+Last run results: Your code has been rated at 5.93/10
 
-## Unit testing
+## Unit testing [NO TESTS]
 The dev docker image is needed for this section.  Run the command:
 
 ```
@@ -61,7 +62,7 @@ to run the unit tests.
  Add loggin module
 
 
-## Current Response for text.txt
+## Current Response for text.txt using Async [no multiprocess]
 ```
 cat test.txt |docker run -i -v $(pwd)/src:/usr/share/src    pyscraper python3 -u main.py
 Exception  Exception Type: <class 'AssertionError'>

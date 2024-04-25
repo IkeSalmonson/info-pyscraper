@@ -3,7 +3,6 @@ This module parses html and text strings
 """
 import re
 #import phonenumbers
-import json
 from bs4 import BeautifulSoup
 
 
@@ -34,13 +33,6 @@ def format_input( input_string):
             not_urls.append(validated_string)
     return urls, not_urls
 
-def format_output(url_infos:dict) -> list:
-    """ format output to return one json object as string per line """
-    formated_output = []
-    for info in url_infos:
-        json_output = info.to_string()
-    return formated_output
-
 
 def find_logo_image(  html_soup: BeautifulSoup ) -> str:
     """Find logo image in html and format as full URL """
@@ -49,7 +41,7 @@ def find_logo_image(  html_soup: BeautifulSoup ) -> str:
     logo_candidates_href = html_soup.find_all(href=re_logo )
     logo_candidates.extend(logo_candidates_href)
     logo_candidates.extend( logo_candidates_class_)
-    logo_src =  list(filter(lambda a: hasattr(a, 'src') == True , logo_candidates))
+    logo_src =  list(filter(lambda a: hasattr(a, 'src') is True , logo_candidates))
 
         # Decision tree:
         # html tag Logo
