@@ -1,1 +1,3 @@
 dev_examples
+src/.pytest_cache
+src/__pycache__/
