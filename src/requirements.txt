@@ -3,5 +3,4 @@ asyncio
 aiohttp
 aiomultiprocess
 beautifulsoup4
-
-logging
+phonenumbers 

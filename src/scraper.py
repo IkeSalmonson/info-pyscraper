@@ -1,9 +1,16 @@
+""" scraper.py
+This module orchestrates Multiprocess Async scraper process
+"""
+import sys 
+
 import asyncio
 from aiohttp import request
 from aiomultiprocess import Pool
+
+
+## dependencies for parser 
 from bs4 import BeautifulSoup
 import re 
-import sys 
 
 
 import logging
