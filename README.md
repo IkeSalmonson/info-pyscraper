@@ -37,17 +37,22 @@ cat test.txt |docker run -i -v $(pwd)/src:/usr/share/src    ikesalmonson/python-
 
 ## Code quality
 
-The package `pylint` is needed for this section.
-
-Run the command `python3 -m pylint .` to run the linter toolkit.
+The dev docker image is needed for this section.  Run the command:
+```
+docker run -i -v $(pwd)/src:/usr/share/src  pyscraper:dev python3  -m pylint
+```
+To run the linter toolkit.
 
 ## Unit testing
+The dev docker image is needed for this section.  Run the command:
 
-The package `pytest` is needed for this section.
-
-Run the command ``python3 -m pytest test/ to run the unit tests.
+```
+docker run -i -v $(pwd)/src:/usr/share/src  pyscraper:dev python3  -m pytest
+```
+to run the unit tests.
 
 ## Improvments
+ Add unitest coverage 
  
  Add comprehensive phone library to parse phone information: 
  - https://pypi.org/project/phonenumbers/
