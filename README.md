@@ -48,18 +48,22 @@ docker run -i -v $(pwd)/src:/usr/share/src  pyscraper:dev python3  -m pytest
 ```
 to run the unit tests.
 
-## Improvments
+## Improvements
  Add unitest coverage 
  
  Add comprehensive phone library to parse phone information: 
  - https://pypi.org/project/phonenumbers/
      - https://github.com/google/libphonenumber/
 
+ Improve logo url selection decision tree
+ 
  Add resilience to webscraper blocks by:
  - Using differente request headers 
  - Using a crawler browser 
  
  Add loggin module
+
+ Format Output to Specification
 
 
 ## Current Response for text.txt using Async [no multiprocess]
