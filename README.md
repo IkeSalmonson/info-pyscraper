@@ -9,24 +9,20 @@
     - Docker    
 
  To build Docker Image:
- ```
-     docker build -f 'Dockerfile.prod' -t 'pyscraper'  .  
+```
+docker build -f 'Dockerfile.prod' -t 'pyscraper'  .  
 ```
 
  To run with website.txt as input, copy website.txt to local repository or reference as a valid relative path: 
- ```
- cat website.txt | docker run -i pyscraper
+```
+cat website.txt | docker run -i pyscraper
 ```
  
-
-
 # Development
-
-Consider running the commands from within the `src` folder:
 
  To build a development Docker Image:
 ```
-    docker build -t 'pyscraper:dev'  .   
+docker build -t 'pyscraper:dev'  .   
 ```
 
  Running develpment image on local volume: 
@@ -61,4 +57,17 @@ to run the unit tests.
  Add resilience to webscraper blocks by:
  - Using differente request headers 
  - Using a crawler browser 
+ 
+ Add loggin module
 
+
+## Current Response for text.txt
+```
+cat test.txt |docker run -i -v $(pwd)/src:/usr/share/src    pyscraper python3 -u main.py
+Exception  Exception Type: <class 'AssertionError'>
+Exception  Exception Type: <class 'AssertionError'>
+Exception  Exception Type: <class 'AssertionError'>
+Exception 'src' Exception Type: <class 'KeyError'>
+{'logo': 'https://www.illion.com.au/wp-content/uploads/2019/03/ION-RGB-Gradient-64.png', 'phones': ['13 23 33', '13 23 33', '24 April 2024', '24 April 2024', '22 April 2024', '22 April 2024', '2 April 2024', '2 April 2024'], 'website': 'https://www.illion.com.au'}
+{'logo': 'https://www.illion.com.au/wp-content/uploads/2019/03/ION-RGB-Gradient-64.png', 'phones': ['13 23 33', '13 23 33', '13 23 33', '+61 3 9828 3200', '1800 233 533'], 'website': 'https://www.illion.com.au/contact-us'}
+```
