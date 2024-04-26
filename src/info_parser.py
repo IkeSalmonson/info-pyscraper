@@ -5,7 +5,8 @@ import re
 #import phonenumbers
 from bs4 import BeautifulSoup
 
-
+import logging
+_logger = logging.getLogger(__name__)
 
 URL_REGEX = "^((http|https)://)[-a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)$"
 PHONE_CANDIDATE_REGEX = "(?:([+]\\d{1,4})[-.\\s]?)?(?:([(]\\d{1,3}[)])[-.\\s]?)?(\\d{1,4})[-.\\s]?(\\d{1,4})[-.\\s]?(\\d{1,9})"
@@ -16,6 +17,7 @@ re_logo = re.compile("logo")
 
 def validate_url(url: str) :
     """ Get valid URLs from input """
+    _logger.info("input size {} input {}".format(len(url), url))
     return url , re_url.search( url) is not None
 
 def format_input( input_string):
@@ -42,14 +44,19 @@ def find_logo_image(  html_soup: BeautifulSoup ) -> str:
     logo_candidates.extend(logo_candidates_href)
     logo_candidates.extend( logo_candidates_class_)
     logo_src =  list(filter(lambda a: hasattr(a, 'src') is True , logo_candidates))
+    #_logger.info(f"logo_src > {logo_src}")
 
         # Decision tree:
         # html tag Logo
         # img link contains logo
         # img link contains company name
         # img link leads to / or /home or home/*
-    logo_src_result = logo_src[0]['src']
-    return logo_src_result
+
+    if not logo_src:
+        return 'no logo found '
+    else:
+        logo_src_result = logo_src[0]['src']
+        return logo_src_result
 
 
 def find_contact_phone( html_soup: BeautifulSoup ) -> list:

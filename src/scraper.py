@@ -6,25 +6,37 @@ import asyncio
 from aiohttp import request
 from aiomultiprocess import Pool
 
-
+import logging
+_logger = logging.getLogger(__name__)
 
 from info_parser import get_scraped_info
 
+import random 
+
+uagent = [
+    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0) Opera 12.14",
+    "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:26.0) Gecko/20100101 Firefox/26.0",
+    "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3) Gecko/20090913 Firefox/3.5.3",
+    "Mozilla/5.0 (Windows; U; Windows NT 6.1; en; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3 (.NET CLR 3.5.30729)",
+    "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/535.7 (KHTML, like Gecko) Comodo_Dragon/16.1.1.0 Chrome/16.0.912.63 Safari/535.7",
+    "Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US; rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3 (.NET CLR 3.5.30729)",
+    "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.1) Gecko/20090718 Firefox/3.5.1",
+    "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0"]
 
 async def fetch_list(url: str) :
     """ Get the URL of each page from the URL list and scrap info  """
-
     scraped_info_list =[]
-    try:
-        headers = {"user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
-        async with request("GET", url , headers = headers) as response:
 
+    try:
+        chosenUserAgent = random.choice(uagent)
+    
+        headers = {"user-agent": chosenUserAgent}
+        async with request("GET", url , headers = headers) as response:
             assert response.status == 200
             html = await response.text()
-
             scraped_info_list.append( get_scraped_info(url, html) )
     except Exception as err:
-        print('Exception', err , 'Exception Type:', type(err), file=sys.stderr)
+        _logger.info(f'Exception  {err} Exception Type:{type(err)}' )
 
     return scraped_info_list
 
