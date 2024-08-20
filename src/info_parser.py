@@ -13,7 +13,7 @@ PHONE_CANDIDATE_REGEX = "(?:([+]\\d{1,4})[-.\\s]?)?(?:([(]\\d{1,3}[)])[-.\\s]?)?
 
 re_url = re.compile(URL_REGEX)
 re_phone_candidate = re.compile(PHONE_CANDIDATE_REGEX)
-re_logo = re.compile("logo")
+re_logo = re.compile("logo", re.IGNORECASE)
 
 def validate_url(url: str) :
     """ Get valid URLs from input """
@@ -39,25 +39,35 @@ def format_input( input_string):
 def find_logo_image(  html_soup: BeautifulSoup ) -> str:
     """Find logo image in html and format as full URL """
     logo_candidates = []
-    logo_candidates_class_ = html_soup.find_all(class_=re_logo )
-    logo_candidates_href = html_soup.find_all(href=re_logo )
-    logo_candidates.extend(logo_candidates_href)
-    logo_candidates.extend( logo_candidates_class_)
-    logo_src =  list(filter(lambda a: hasattr(a, 'src') is True , logo_candidates))
-    #_logger.info(f"logo_src > {logo_src}")
-
+    logo_candidates = html_soup.find_all("img")
+    for logo in logo_candidates:
+        if re_logo.search(logo['src'] ):
+            return logo['src']
+    
+    logo_candidates_class_ = html_soup.find_all(  class_=re_logo )
+    for logo in logo_candidates_class_:
+        if re_logo.search(logo['src'] ):
+            return logo['src']
+        else:
+            return 'no img logo'   
+    ### ELSE SEARCH \/
+    #logo_candidates_class_ = html_soup.find_all("img", class_=re_logo )
+    #logo_candidates_href = html_soup.find_all("img",href=re_logo )
+    #logo_candidates_id = html_soup.find_all("img" , id=re_logo )
+    #logo_candidates.extend(logo_candidates_href)
+    #logo_candidates.extend( logo_candidates_class_)
+    #logo_candidates.extend( logo_candidates_id)
+    #logo_src =  list(filter(lambda a: hasattr(a, 'src') is True , logo_candidates))
+    #_logger.info(f"logo_src > {logo_src}") 
         # Decision tree:
         # html tag Logo
         # img link contains logo
         # img link contains company name
         # img link leads to / or /home or home/*
-
-    if not logo_src:
-        return 'no logo found '
-    else:
-        logo_src_result = logo_src[0]['src']
-        return logo_src_result
-
+    #Return format
+    ## if complete URL > return 
+    ## if relative path URL > return url_root + relative_path    
+ 
 
 def find_contact_phone( html_soup: BeautifulSoup ) -> list:
     """ Search and format phone in html page"""

@@ -61,7 +61,7 @@ to run the unit tests.
  - Using differente request headers 
  - Using a crawler browser 
  
- Add loggin module
+ ~~ Add loggin module ~~ 
 
  Format Output to Specification
 
