@@ -1,3 +1,2 @@
 dev_examples
-src/.pytest_cache
-src/__pycache__
+/src/__pycache__
